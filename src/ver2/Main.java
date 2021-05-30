@@ -1,8 +1,5 @@
 package ver2;
 
-import java.awt.Dimension;
-
-import javax.swing.JFrame;
 
 public class Main {
 
@@ -11,7 +8,9 @@ public class Main {
 		Run r = new Run();
 		
 		r.run();
-		/*readyCoords a = new readyCoords();
+		/*
+		
+		readyCoords a = new readyCoords();
 		
 		int[][] b = a.cannon;
 		
@@ -39,8 +38,19 @@ public class Main {
 				
 			}
 			
-		}*/
-
+		}
+		
+	
+		
+		
+		
+		
+		Pair a = new Pair(1000000000,1000000);
+		System.out.print(a.hashCode()); 
+		
+		
+		*/
+		 	
 		
 		
 	}

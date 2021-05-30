@@ -28,6 +28,9 @@ public class Run implements Runnable {
 		coords = new readyCoords();		
 		model = new Model();
 		model.addModel(coords.cannon, new int[] {10,10});
+		model.addModel(coords.cannon, new int[] {60,10});
+		model.addModel(coords.cannon, new int[] {110,10});
+		model.addModel(coords.cannon, new int[] {160,10});
 		ctrl = new Controller(model);
 		gui = new GUI(model, sideLength);
 		model.addObserver(gui);
@@ -118,6 +121,7 @@ public class Run implements Runnable {
 				newTime = System.nanoTime();
 				//System.out.println(newTime - oldTime);
 				if(running && (newTime - oldTime > speed*1000000)) {
+					System.out.println("TIME OVER LIMIT: " + (newTime - oldTime) + "nanoseconds");
 					ctrl.calcNextRound();
 					//Thread.sleep(speed);
 					oldTime = newTime;
