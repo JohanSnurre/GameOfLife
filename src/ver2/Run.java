@@ -19,18 +19,30 @@ public class Run implements Runnable {
 	int sideLength;
 	int speed;
 	boolean running;
+	double frameRate;
 
 	public Run() {
 		
 		sideLength = 5;
-		speed = 1;
+		//speed = 1000;
+		frameRate = 144;
 		running = true;
 		coords = new readyCoords();		
 		model = new Model();
-		model.addModel(coords.cannon, new int[] {10,10});
-		model.addModel(coords.cannon, new int[] {60,10});
-		model.addModel(coords.cannon, new int[] {110,10});
-		model.addModel(coords.cannon, new int[] {160,10});
+		int p = 4;
+		for(int i = 0; i< 16*p; i++) {
+			for(int j= 0; j< 9*p; j++) {
+				model.addModel(coords.u, new int[] {5*i,5*j});
+			}
+			
+			
+			
+		}
+		
+//		model.addModel(coords.cannon, new int[] {10,10});
+//		model.addModel(coords.cannon, new int[] {60,10});
+//		model.addModel(coords.cannon, new int[] {110,10});
+//		model.addModel(coords.cannon, new int[] {160,10});
 		ctrl = new Controller(model);
 		gui = new GUI(model, sideLength);
 		model.addObserver(gui);
@@ -67,10 +79,10 @@ public class Run implements Runnable {
 				int x = arg0.getX()/sideLength;
 				int y = arg0.getY()/sideLength;
 				if(model.contains(new Pair(x,y))) {
-					model.dropPos(x, y);
+					ctrl.dropPos(x, y);
 				}
 				else {
-					model.fillPos(x, y);
+					ctrl.fillPos(x, y);
 				}
 				
 			}
@@ -115,19 +127,24 @@ public class Run implements Runnable {
 	public void run() {
 		double oldTime = System.nanoTime();
 		double newTime;
+		
+		double interval = 1000000000/frameRate;
+		
 		while(true) {
-			//System.out.println("NOW PRINTING");
 			
 				newTime = System.nanoTime();
-				//System.out.println(newTime - oldTime);
-				if(running && (newTime - oldTime > speed*1000000)) {
-					System.out.println("TIME OVER LIMIT: " + (newTime - oldTime) + "nanoseconds");
+				double delta = newTime - oldTime;
+				
+				if(running && (delta >= interval)) {
+					System.out.println("Delta time: " +delta/1000000000 + " seconds" );
 					ctrl.calcNextRound();
-					//Thread.sleep(speed);
 					oldTime = newTime;
+					
 				}
 				
 		}
+		
+		
 	
 	}
 

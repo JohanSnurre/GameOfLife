@@ -14,14 +14,25 @@ public class Controller {
 		
 	}
 	
-
+	public synchronized void fillPos(int x, int y) {
+		
+		this.model.fillPos(x, y);
+		
+	}
 	
-	public void calcNextRound() {
+	public synchronized void dropPos(int x, int y) {
+		
+		this.model.dropPos(x, y);
+		
+	}
+	
+	public synchronized void calcNextRound() {
 		
 		Iterator it;
 		HashMap<Pair, Integer> temp = new HashMap<Pair, Integer>();
 		
 		
+		//For every filled in position in the field, add 1 to every neighbouring square in a temporary field(the temp hashmap)
 		it = model.getField().entrySet().iterator();
 		while(it.hasNext()) {
 			
@@ -29,9 +40,11 @@ public class Controller {
 			int x = ((Pair) p.getKey()).getFirst();
 			int y = ((Pair) p.getKey()).getSecond();
 			
-			for(int i = -1 ; i < 2; i++) {
+			int range = 2;
+			
+			for(int i = -1 ; i < range; i++) {
 				
-				for(int j = -1; j < 2; j++) {
+				for(int j = -1; j < range; j++) {
 					if(i == 0 && j == 0) {
 						continue;
 					}
@@ -49,6 +62,8 @@ public class Controller {
 			}
 		}
 		
+		
+		//for every filled in position in the temporary field(temp hashmap) decide wether it lives or not
 		it = temp.entrySet().iterator();
 		while(it.hasNext()) {
 			
@@ -70,7 +85,6 @@ public class Controller {
 		}
 		
 		model.setField(temp);
-		
 		
 		
 	}

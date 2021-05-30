@@ -8,6 +8,7 @@ public class Main {
 		Run r = new Run();
 		
 		r.run();
+		
 		/*
 		
 		readyCoords a = new readyCoords();

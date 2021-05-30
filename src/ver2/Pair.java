@@ -14,19 +14,12 @@ public class Pair {
 
 	@Override
 	public boolean equals(Object other) {
-		try {
 			if (other instanceof Pair) {
 				if (((Pair) other).getFirst() == this.first && ((Pair) other).getSecond() == this.second) {
 					return true;
 				}
 			}
 			return false;
-
-		} catch (Exception e) {
-			return false;
-
-		}
-
 	}
 
 	@Override
